@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import SocketIOClient from 'socket.io-client';
 import axios from 'axios';
 import SearchForm from './SearchForm';
@@ -15,6 +15,9 @@ class App extends Component {
       this.setState({
         tweets: response.data
       });
+    })
+    .catch(e => {
+      console.error('server not running');
     });
     this.socket = SocketIOClient('http://localhost:8080');
     this.socket.on('update', data => {

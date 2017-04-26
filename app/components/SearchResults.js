@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View} from 'react-native';
+import { Text, View} from 'react-native';
 import { Link } from 'react-router-native';
 import axios from 'axios';
 import SearchForm from './SearchForm';
 import TweetList from './TweetList';
-import styles from './Styles';
 
 class SearchResults extends Component {
   state = {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity } from "react-native";
+import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { Redirect } from "react-router-native";
-import styles from "./Styles";
+import Styles from "./Styles";
 
 class SearchForm extends Component {
   state = {
@@ -16,13 +16,13 @@ class SearchForm extends Component {
   render() {
     if (this.state.sent) return <Redirect to={`/search/${this.state.term}`} />;
     return (
-      <View style={styles.form}>
+      <View style={Styles.form}>
         <TextInput
-          style={styles.input}
+          style={Styles.input}
           onChangeText={text => this.setState({ term: text })}
           value={this.state.term}
         />
-        <TouchableOpacity onPress={this.handleSearch} style={styles.submit}>
+        <TouchableOpacity onPress={this.handleSearch} style={Styles.submit}>
           <Text>Search</Text>
         </TouchableOpacity>
       </View>

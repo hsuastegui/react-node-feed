@@ -14,7 +14,7 @@ class TweetList extends Component {
   render() {
     return (
       <View>
-        <ScrollView>
+        <ScrollView style={{height: 400}}>
           {this.renderTweets()}
         </ScrollView>
         {this.props.tweets.length ? null : <Text>Loading...</Text>}

@@ -49,6 +49,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 5
+  },
+  tweet: {
+    borderWidth: 1,
+    marginBottom: 10,
+    padding: 10,
+    shadowColor: "#000000",
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      height: 2,
+      width: -2
+    }
   }
 });
 

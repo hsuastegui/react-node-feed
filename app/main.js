@@ -6,15 +6,15 @@ import { NativeRouter, Route, Link } from 'react-router-native';
 
 import App from './components/App';
 import SearchResults from './components/SearchResults';
-import styles from './components/Styles';
+import Styles from './components/Styles';
 
 const Main = () => {
   return (
     <NativeRouter>
-      <View style={styles.mainContainer}>
-        <Text style={styles.header}>Feed</Text>
-        <View style={styles.container}>
-          <Link to="/" style={styles.link}><Text>Home</Text></Link>
+      <View style={Styles.mainContainer}>
+        <Text style={Styles.header}>Feed</Text>
+        <View style={Styles.container}>
+          <Link to="/" style={Styles.link}><Text>Home</Text></Link>
           <Route exact path="/" component={App}/>
           <Route path="/search/:term" component={SearchResults}/>
         </View>

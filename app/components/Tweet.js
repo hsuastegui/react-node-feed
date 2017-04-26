@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import moment from 'moment';
+import Styles from './Styles';
 
 const Tweet = ({tweet}) => {
   const cleanText = () => {
@@ -25,12 +26,14 @@ const Tweet = ({tweet}) => {
     return name;
   };
   return(
-    <View style={{borderWidth: 1, marginBottom: 10, padding: 10}}>
-      <Text>{cleanText()}</Text>
-      <Text>{moment(tweet.created_at, 'ddd MMM DD HH:mm:ss Z YYYY').format('LLLL')}</Text>
-      <Text>{tweet.user.name}</Text>
-      <Text>Retweets: {tweet.retweet_count}</Text>
-      <Text>Favs: {tweet.favorite_count}</Text>
+    <View style={Styles.tweet}>
+      <Text style={{fontWeight:'bold', marginBottom: 5}}>{cleanText()}</Text>
+      <Text style={{fontStyle: 'italic', marginBottom: 5}}>{moment(tweet.created_at, 'ddd MMM DD HH:mm:ss Z YYYY').format('LLLL')}</Text>
+      <View style={{flexDirection: 'row'}}>
+        <Text>{tweet.user.name}</Text>
+        <Text style={{marginLeft: 10}}>Retweets: {tweet.retweet_count}</Text>
+        <Text style={{marginLeft: 10}}>Favs: {tweet.favorite_count}</Text>
+      </View>
     </View>
   );
 };
