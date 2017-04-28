@@ -1,19 +1,18 @@
 import React, { Component } from "react";
 import SocketIOClient from "socket.io-client";
 import axios from "axios";
-import SearchForm from "./SearchForm";
-import SearchResults from "./SearchResults";
+import Navigation from "./Navigation";
 import TweetList from "./TweetList";
+import Config from "./Config";
 import "./App.css";
 
 class App extends Component {
   state = {
-    tweets: [],
-    term: ""
+    tweets: []
   };
   componentDidMount() {
     axios
-      .get("http://localhost:8080/")
+      .get(Config.server_url)
       .then(response => {
         this.setState({
           tweets: response.data
@@ -22,7 +21,7 @@ class App extends Component {
       .catch(e => {
         console.error("server not running");
       });
-    this.socket = SocketIOClient("http://localhost:8080");
+    this.socket = SocketIOClient(Config.server_url);
     this.socket.on("update", data => {
       this.setState({
         tweets: data
@@ -34,34 +33,17 @@ class App extends Component {
   }
   render() {
     return (
-      <section className="App container">
-        <div className="row">
-          <div className="col-xs-12 col-sm-6">
-            <ul className="nav nav-pills">
-              <li className={this.state.term ? 'active' : ''}>
-                <a href="#" onClick={this.handleClick}>
-                  <i className="fa fa-home" /> Home
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="col-xs-12 col-sm-6 text-right">
-            <SearchForm handleForm={this.handleForm} />
-          </div>
-        </div>
-        {this.state.term !== ""
-          ? <SearchResults term={this.state.term} />
-          : <div><h1>Feed</h1><TweetList tweets={this.state.tweets} /></div>}
-      </section>
+      <div>
+        <Navigation
+          location={this.props.location}
+          history={this.props.history}
+          match={this.props.match}
+        />
+        <h1>Feed</h1>
+        <TweetList tweets={this.state.tweets} />
+      </div>
     );
   }
-  handleForm = term => {
-    this.setState({ term });
-  };
-  handleClick = e => {
-    e.preventDefault();
-    this.setState({ term: "" });
-  };
 }
 
 export default App;

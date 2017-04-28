@@ -1,28 +1,39 @@
-import React, { Component } from 'react';
-import './SearchForm.css';
+import React, { Component } from "react";
+import { Redirect } from "react-router";
+import "./SearchForm.css";
 
 class SearchForm extends Component {
   state = {
-    term: ''
+    term: "",
+    sent: false
   };
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({
       term: e.target.value
     });
-  }
-  handleSubmit = (e) => {
+  };
+  handleSubmit = e => {
     e.preventDefault();
-    this.props.handleForm(this.state.term);
-  }
-  render(){
-    return(
+    this.setState({ sent: true });
+  };
+  render() {
+    if (this.state.sent) return <Redirect to={`/search/${this.state.term}`} />;
+    return (
       <form onSubmit={this.handleSubmit} className="SearchForm form-inline">
         <div className="form-group">
-          <input className="form-control" type="text" placeholder="search" value={this.state.term} onChange={this.handleChange} />
+          <input
+            className="form-control"
+            type="text"
+            placeholder="search"
+            value={this.state.term}
+            onChange={this.handleChange}
+          />
         </div>
-        <button className="btn btn-default" type="submit"><i className="fa fa-search" aria-hidden="true"></i> Search</button>
+        <button className="btn btn-default" type="submit">
+          <i className="fa fa-search" aria-hidden="true" /> Search
+        </button>
       </form>
-    )
+    );
   }
 }
 
